@@ -1,0 +1,12 @@
+{
+    "base": "configs/xsac.yaml",
+    "paired_keys": [
+        ["env", "alg_kwargs.beta"],
+        ["alg_kwargs.loss", "alg_kwargs.use_value_log_prob"]
+    ],
+    "env": ["CheetahRun-v0", "HopperHop-v0", "WalkerRun-v0", "QuadrupedRun-v0"],
+    "alg_kwargs.beta": [2.0, 1.0, 2.0, 5.0],
+    "alg_kwargs.loss": ["gumbel_rescale", "mse"],
+    "alg_kwargs.use_value_log_prob": [false, true],
+    "seed": [1, 2, 3]
+}

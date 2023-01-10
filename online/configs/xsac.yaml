@@ -1,0 +1,57 @@
+alg: GumbelSAC
+alg_kwargs:
+  tau: 0.005
+  init_temperature: 0.1
+  target_freq: 2
+  exp_clip: 10 # Approximately ln 1000
+  beta: 1.0
+  init_steps: 5000
+  alpha: null
+  loss: gumbel_rescale
+  value_action_noise: 0.0
+  use_value_log_prob: False
+
+optim: Adam
+optim_kwargs:
+  lr: 0.0001
+
+network: ActorCriticValuePolicy
+network_kwargs:
+  actor_class: DiagonalGaussianMLPActor
+  actor_kwargs:
+    hidden_layers: [1024, 1024]
+    log_std_bounds: [-5, 2]
+  critic_class: ContinuousMLPCritic
+  critic_kwargs:
+    hidden_layers: [1024, 1024]
+    num_q_fns: 2
+  value_class: MLPValue
+  value_kwargs:
+    hidden_layers: [1024, 1024]
+  ortho_init: true
+
+batch_size: null # Use serial replay buffer
+collate_fn: null # The collate function passed to the dataloader. None uses pytorch default.
+checkpoint: null # A checkpoint to initialize the network from.
+seed: null
+
+env: CheetahRun-v0
+
+dataset: ReplayBuffer
+dataset_kwargs:
+  discount: 0.99
+  nstep: 1
+  capacity: 1000000
+  fetch_every: 1000
+  batch_size: 1024
+
+processor: null
+
+train_kwargs: # Arguments given to Algorithm.train
+  total_steps: 2000000 # The total number of steps to train
+  log_freq: 250 # How often to log values
+  eval_freq: 10000 # How often to run evals
+  eval_ep: 10 # Number of enviornment episodes to run for evaluation, or -1 if none should be run.
+  loss_metric: reward # The validation metric that determines when to save the "best_checkpoint"
+  workers: 0 # Number of dataloader workers.
+  profile_freq: 250

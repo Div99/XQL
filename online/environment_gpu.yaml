@@ -1,0 +1,45 @@
+name: research
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python
+  
+  # pytorch
+  - pytorch
+  - cudatoolkit=11.3
+  - torchvision
+  - torchtext
+
+  # NP Family
+  - numpy
+  - scipy
+  - networkx
+  - scikit-image
+
+  # IO
+  - imageio
+  - pillow
+  - pyyaml
+  - cloudpickle
+  - h5py
+  - absl-py
+  - pyparsing
+
+  # Plotting
+  - tensorboard
+  - pandas
+  - matplotlib
+  - seaborn
+
+  # Other
+  - pytest
+  - tqdm
+  - future
+
+  - pip
+  - pip:
+      - gym>=0.12
+      - dm_control
+      - mujoco-py<2.2,>=2.1

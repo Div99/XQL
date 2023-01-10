@@ -1,0 +1,12 @@
+{
+    "base": "configs/xtd3.yaml",
+    "paired_keys": [
+        ["env", "alg_kwargs.beta", "alg_kwargs.policy_noise"]
+    ],
+    "env": ["CheetahRun-v0", "WalkerRun-v0", "HopperHop-v0", "QuadrupedRun-v0"],
+    "alg_kwargs.beta": [5.0, 2.0, 2.0, 5.0],
+    "alg_kwargs.policy_noise": [0.1, 0.1, 0.05, 0.1],
+    "alg_kwargs.loss": ["gumbel_rescale", "mse"],
+    "network_kwargs.critic_kwargs.num_q_fns": [2],
+    "seed": [1,2,3,4]
+}
