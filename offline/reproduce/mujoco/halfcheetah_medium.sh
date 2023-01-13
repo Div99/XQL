@@ -6,7 +6,7 @@ cd offline/
 pids=()
 for i in {0..5}
 do
-   python train_offline.py --config=configs/mujoco_config.py --double=True --env_name=halfcheetah-medium-v2 --grad_pen=False --lambda_gp=0 --max_clip=7 --noise=True --temp=1 --seed=$i &
+   python train_offline.py --config=configs/mujoco_config.py --double=True --env_name=halfcheetah-medium-v2 --max_clip=7 --noise=True --temp=1 --seed=$i &
 
     pids+=( "$!" )
     sleep 5 # add 5 second delay

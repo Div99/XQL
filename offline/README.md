@@ -1,7 +1,5 @@
 # Offline Reinforcement Learning with Extreme Q-Learning
 
-This code was borrowed from IQL (Kostrikov et al 2021). You can find their original codebase [here](https://github.com/ikostrikov/implicit_q_learning).
-
 ## How to run the code
 
 ### Install dependencies
@@ -41,4 +39,7 @@ python train_finetune.py --env_name=antmaze-large-play-v0 --config=configs/antma
 
 ### Reproduction
 
-For reproducing our experiments, please run the scripts in the reproduce folder for the settings we use for each environment.
+For reproducing our experiments, please run the scripts in the [reproduce](reproduce) folder for the settings we use for each environment.
+
+### 
+This code was borrowed from IQL (Kostrikov et al 2021). You can find their original codebase [here](https://github.com/ikostrikov/implicit_q_learning).
