@@ -276,21 +276,15 @@ def plot_max_reg():
 
 if __name__ == "__main__":
     # # Loss Plots
-    # plot_expectile_loss()
-    # plot_gumbel_loss(min=False)
-    # plot_gumbel_loss(min=True)
+    plot_expectile_loss()
+    plot_gumbel_loss(min=True)
 
     # # Normal Plots
-    # plot_expectile_normal()
-    # plot_gumbel_normal(min=False)
-    # plot_gumbel_normal(min=True)
-    # plot_gumbel_mle_normal()
+    plot_expectile_normal()
+    plot_gumbel_normal(min=True)
+    plot_gumbel_mle_normal()
 
     # Quadratic Plots
-    # plot_expectile_quadratic()
-    # plot_gumbel_quadratic(min=False)
-    # plot_gumbel_quadratic(min=True)
-    # plot_gumbel_mle_quadratic()
-
-    # Regression on Max of Normal
-    plot_max_reg()
+    plot_expectile_quadratic()
+    plot_gumbel_quadratic(min=True)
+    plot_gumbel_mle_quadratic()

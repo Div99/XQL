@@ -3,8 +3,8 @@ import setuptools
 setuptools.setup(
     name="research",
     version="0.0.1",
-    author="Redacted",
-    author_email="Redacted",
+    author="Joey Hejna",
+    author_email="jhejna@stanford.edu",
     description="Experiment framework.",
     packages=setuptools.find_packages(),
     classifiers=[
