@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>38967041 &middot; IQ-Learn: Inverse soft-Q Learning for Imitation</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+
+    <link rel="preconnect" href="https://slideslive.com/">
+    <link rel="preconnect" href="https://cdn.slideslive.com/">
+
+
+    <link rel="preconnect" href="//ben.slideslive.com:443/">
+
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=latin,latin-ext"
+        as="style">
+    <link rel="preload" href="/packs/css/1-fa2b8a78.chunk.css" as="style" type="text/css">
+    <link rel="preload" href="/packs/css/embed-122ffba6.css" as="style" type="text/css">
+    <link rel="preload" href="/packs/js/0-9d31149c34fbaa452725.chunk.js" as="script" type="text/javascript">
+    <link rel="preload" href="/packs/js/1-f4fbc77ffa4985c7590d.chunk.js" as="script" type="text/javascript">
+    <link rel="preload" href="/packs/js/embed-57db6c89c9b23d94dd46.js" as="script" type="text/javascript">
+
+    <meta property="fb:app_id" content="380434528731384">
+    <meta name="google-site-verification" content="k6rQywy6tzc20h1fL1H7XlLoS2A1vX7mdGl46rbMG24">
+
+
+
+
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <link rel="apple-touch-icon" type="image/png" href="/packs/media/images/apple-touch-icon-c20cd99f.png"
+        sizes="180x180" />
+    <link rel="mask-icon" type="image/x-icon" href="/packs/media/images/safari-pinned-tab-922af3fd.svg"
+        color="#5bbad5" />
+
+    <link rel="icon" type="image/png" href="/packs/media/images/favicon-32x32-5e3bc2a6.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/packs/media/images/favicon-16x16-69e3579a.png" sizes="16x16" />
+    <link rel="shortcut icon" type="image/x-icon" href="/packs/media/images/favicon-4b828a85.ico" />
+
+
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token"
+        content="IH-NnEpUPkmA8TkDHfNzQalK5NqrkrjIYcEii0aCVQeo4JHs4-IxUHNA_MYZuJrM4zEoKCKQh0Vs5LriSKrk5Q" />
+    <meta name="ben-base-url" content="//ben.slideslive.com:443">
+    <script>
+        //<![CDATA[
+        window.gon = {}; gon.env = "production"; gon.analytics_uuid = "2f7f8b9e-d23a-478f-ad00-f0905aa4836d"; gon.locale = "en"; gon.default_exchange_rates = { "CZK": 1.0, "AUD": 15.764, "BGN": 12.567, "BRL": 3.831, "CAD": 17.076, "CHF": 23.722, "CNY": 3.414, "DKK": 3.305, "EUR": 24.58, "GBP": 29.426, "HKD": 2.789, "HRK": 3.268, "HUF": 0.06788, "IDR": 0.001514, "ILS": 7.03, "INR": 0.29234, "ISK": 0.16744, "JPY": 0.18759, "KRW": 0.01816, "LTL": 8.03, "LVL": 39.039, "MXN": 1.063, "MYR": 5.184, "NOK": 2.465, "NZD": 14.814, "PHP": 0.42637, "PLN": 5.382, "RON": 4.97, "RUB": 0.28697, "SEK": 2.397, "SGD": 16.04, "THB": 0.6543899999999999, "TRY": 1.613, "USD": 21.739, "XDR": 30.359, "ZAR": 1.372 }; gon.buckets = { "s3_upload": "slideslive-upload" };
+//]]>
+    </script>
+
+    <link rel="stylesheet" media="all"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=latin,latin-ext" />
+    <link rel="stylesheet" media="all" href="/packs/css/1-fa2b8a78.chunk.css" />
+    <link rel="stylesheet" media="all" href="/packs/css/embed-122ffba6.css" />
+
+
+    <script src="/packs/js/0-9d31149c34fbaa452725.chunk.js"></script>
+    <script src="/packs/js/1-f4fbc77ffa4985c7590d.chunk.js"></script>
+    <script src="/packs/js/embed-57db6c89c9b23d94dd46.js"></script>
+
+
+
+</head>
+
+<body class="d2ViL2VtYmVkL2JvZHk__container ">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-39862447-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-39862447-1', {
+            transport_type: 'beacon',
+            user_id: (gon && gon.user_id) || null,
+        });
+    </script>
+
+
+    <div id="player" tabindex="0" data-component-controller="web--embed--player" data-presentation-id="38967041"
+        data-locale="en" data-linkify-title="false" data-mode="video_slideshow"
+        data-player-error-report-url="https://player-errors-api.slideslive.com/v1/report"
+        data-player-token="eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDE0NDM2NTAsImV4cCI6MTY0MTQ1MDg1MCwiaXAiOiIxMjguMTIuMTIzLjIyNCIsInUiOjkzMzc2LCJwIjozODk2NzA0MSwibSI6MTc0ODMzfQ.ixc1jnh8Qw12m-uQaXUFVaXR2Mqa6RDZlhhWjFgtavk"
+        data-analytics-session-token="eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NDE0NDM2NTAsInAiOnsiaSI6Mzg5NjcwNDEsIm0iOjE3NDgzM30sInUiOnsidXVpZCI6IjJmN2Y4YjllLWQyM2EtNDc4Zi1hZDAwLWYwOTA1YWE0ODM2ZCIsImkiOjkzMzc2LCJlIjoiZGl2eWFuc2gxOTlAZ21haWwuY29tIiwibSI6ZmFsc2UsImMiOm51bGx9LCJzIjp7InV1aWQiOiJkYWE5MGE0Mi1lZWQzLTQ1YTAtODQxYy03MjMxMDg3ZDg3NWUifSwidl9yIjp7InV1aWQiOm51bGx9LCJ0X3AiOm51bGwsInNvIjoiZW1iZWQifQ.EIEwL6cjTlfYGWaV7LOv-mEYTFi-66plgGy4O01ifrA"
+        data-thumbnail-url="https://cdn.slideslive.com/data/presentations/38967041/slideslive_chris-cundy_div-garg_jiaming-song_shuvam-chakraborty_stefano-ermon_iqlearn-inverse-softq-learning-for-imitation.jpg?1637742162"
+        data-controller="web--embed--player" data-start-time="0" data-start-slide="0"
+        data-embed-parent-url="https://neurips.cc/virtual/2021/poster/26537"
+        data-embed-container-origin="https://neurips.cc" data-embed-container-id="presentation-embed-38967041"
+        data-auto-load="true" data-auto-play="false" data-disable-zoom="false" data-disable-fullscreen="false"
+        data-fit-to-viewport="true" data-vertical-enabled="true" data-vertical-enabled-on-mobile="false"
+        data-allow-hidden-controls-when-paused="true"></div>
+
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "95949b7df4c74712a35ce8384777a555"}'></script>
+
+</body>
+
+</html>
