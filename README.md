@@ -34,10 +34,10 @@ Using EVT, we derive our **Extreme Q-Learning (XQL)** framework and consequently
 
 ## Key Advantages
 
-✅  Direclty models V* in continuous action spaces (continuous Q-iteration)
-✅  Implict, no OOD Sampling or actor-critic formulation
-✅  Conservative with respect to the behavior policy
-✅  Improves performance on the D4RL benchmark versus similar approaches
+✅  Direclty models V* in continuous action spaces (continuous Q-iteration) \ 
+✅  Implict, no OOD Sampling or actor-critic formulation \
+✅  Conservative with respect to the behavior policy \
+✅  Improves performance on the D4RL benchmark versus similar approaches \ 
 
 ## Usage
 
