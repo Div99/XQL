@@ -5,9 +5,9 @@
 Official code base for **[Extreme Q-Learning: MaxEnt RL without Entropy](https://arxiv.org/abs/2301.02328)** by [Div Garg](https://divyanshgarg.com/)\*, [Joey Hejna](https://jhejna.github.io)\*, [Mattheiu Geist](https://scholar.google.com/citations?user=ectPLEUAAAAJ&hl=en), and [Stefano Ermon](https://cs.stanford.edu/~ermon/).
 (*Equal Contribution)
 
-**X-QL** is an novel simple algorithm for Q-learning that models the maximal soft-values without needing to sample from a policy. 
+**X-QL** is an novel & simple algorithm for Q-learning that models the maximal soft-values without needing to sample from a policy. It directly estimates the optimal Bellman operator B* in continuous action spaces, successfully extending Q-iteration to continuous settings.
 
-It obtains state-of-art results on Offline RL benchmarks such as D4RL and can improve existing Online RL methods like SAC and TD3. It combines Max Entropy, Conservative & Implicit RL in a single framework.
+It obtains state-of-art results on Offline RL benchmarks such as D4RL, and can improve existing Online RL methods like SAC and TD3. It combines Max Entropy, Conservative & Implicit RL in a single framework.
 # Introduction
 
 <a href="https://div99.github.io/XQL">
@@ -34,7 +34,7 @@ Using EVT, we derive our **Extreme Q-Learning (XQL)** framework and consequently
 
 ## Key Advantages
 
-✅  Directly models V* in continuous action spaces \(continuous Q-iteration\)   \
+✅  Directly models V* in continuous action spaces \(Continuous Q-iteration\)   \
 ✅  Implict, no OOD Sampling or actor-critic formulation \
 ✅  Conservative with respect to the behavior policy \
 ✅  Improves performance on the D4RL benchmark versus similar approaches
