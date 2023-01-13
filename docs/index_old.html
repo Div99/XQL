@@ -1,0 +1,508 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script async="" src="./js/analytics.js"></script>
+	<script src="./js/jsapi" type="text/javascript"></script>
+	<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-WLCRH4G');</script>
+	<!-- End Google Tag Manager -->
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link href="style.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+		rel="stylesheet" type="text/css">
+
+	<title>Extreme Q-Learning: MaxEnt RL Without Entropy</title>
+	<meta property="og:image" content="diagram.svg">
+	<meta property="og:title" content="Extreme Q-Learning: MaxEnt RL Without Entropy">
+
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.984.0" data-gr-ext-installed="">
+	<!-- Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-WLCRH4G');</script>
+	<!-- End Google Tag Manager -->
+	<br>
+	<center>
+		<div id="hero">
+			<h1>Extreme Q-Learning: MaxEnt RL <br> without Entropy</h1>
+			<div class="authors">
+				<table align="center" width="1030px">
+					<tbody>
+						<tr>
+							<td align="center" width="300px">
+								<center>
+									<span><a href="https://divyanshgarg.com/">Divyansh
+											Garg*</a><sup>1<sup></span>
+								</center>
+							</td>
+							<td align="center" width="300px">
+								<center>
+									<span><a href="https://jhejna.github.io">Joey Hejna*
+										</a><sup>1<sup></span>
+								</center>
+							</td>
+							<td align="center" width="300px">
+								<center>
+									<span><a href="">Matthieu Geist</a><sup>2<sup></span>
+								</center>
+							</td>
+							<td align=" center" width="300px">
+								<center>
+									<span><a href="https://cs.stanford.edu/~ermon/">Stefano
+											Ermon</a><sup>1<sup></span>
+								</center>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<table align="center" width="700px">
+				<tbody>
+					<tr>
+						<td align="center" width="200px">
+							<center>
+								<span style="font-size:20px">Stanford<sup>1</sup></span>
+
+								<span
+									style="font-size:20px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google<sup>2</sup></span>
+
+							</center>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" width="200px">
+							<center>
+								<span style="font-size:20px">*Equal Contribution</span>
+							</center>
+						</td>
+					</tr>
+					<!-- <tr>
+						<td align="center" width="200px">
+							<center>
+								<span style="font-size:20px">Google<sup>2</sup></span>
+							</center>
+						</td>
+					</tr> -->
+				</tbody>
+			</table>
+			<!-- <table align="center" width="800px">
+				<tbody>
+					<tr>
+						<td align="center" width="150px">
+							<center>
+								<span style="font-size:25px">Under Review <b><em></em></b></span>
+								</span>
+							</center>
+						</td>
+					</tr>
+				</tbody>
+			</table> -->
+	</center>
+	<center>
+		<table style="margin-top: 20px">
+			<tbody>
+				<tr>
+					<td>
+						<center><a href="https://arxiv.org/abs/2301.02328" target="_blank" class="nav-link link"><img
+									class="filter-blue" src="icons/paper_icon.svg" width="48" height="48"><br>Paper</a>
+						</center>
+					</td>
+					<td>
+						<center><a href="https://github.com/Div99/xql" target="_blank" class="nav-link link"><img
+									class="filter-blue" src="icons/github.svg" width="48" height="48"><br>Code<br></a>
+						</center>
+					</td>
+					<!-- <td>
+						<center><a
+								href="https://slideslive.com/embed/presentation/38967041?embed_parent_url=https%3A%2F%2Fneurips.cc%2Fvirtual%2F2021%2Fposter%2F26537&embed_container_origin=https%3A%2F%2Fneurips.cc&embed_container_id=presentation-embed-38967041&auto_load=true&auto_play=false&zoom_ratio=&disable_fullscreen=false&locale=en&vertical_enabled=true&vertical_enabled_on_mobile=false&allow_hidden_controls_when_paused=true&fit_to_viewport=true&user_uuid=2f7f8b9e-d23a-478f-ad00-f0905aa4836d"
+								target="_blank" class="nav-link link"><img class="filter-blue" src="icons/youtube.svg"
+									width="48" height="48"><br>Talk<br></a></center>
+					</td> -->
+				</tr>
+			</tbody>
+		</table>
+	</center><br>
+	</div>
+	<!-- <table align="center" width="650px">
+		<tbody>
+			<tr>
+				<td align="center" width="150px">
+					<center>
+						<span style="font-size:20px"><a href="https://github.com/Div99/W-Stereo-Disp">
+								[GitHub]</a></span>
+					</center>
+				</td>
+				<td align="center" width="150px">
+					<center>
+						<span style="font-size:20px"><a href="https://slideslive.com/38937842"> [Talk]</a></span>
+					</center>
+				</td>
+				<td align="center" width="150px">
+					<center>
+						<span style="font-size:20px"><a href="https://arxiv.org/abs/2007.03085"> [Paper]</a></span>
+					</center>
+				</td>
+				<td align="center" width="150px">
+					<center>
+						<span style="font-size:20px"><a href="poster.pdf"> [Poster]</a></span>
+					</center>
+				</td>
+			</tr>
+			<tr>
+			</tr>
+		</tbody>
+	</table> -->
+	<!--   		  <br><br>
+<hr> -->
+
+	<table align="center" width="850px">
+		<tbody>
+			<tr>
+				<td width="400px">
+					<center>
+						<img class="img" src="diagram.svg" style="width:700px;height:auto;"><br>
+					</center>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<center>
+						<div style="font-size:18px;"><i><span class="text-danger bold">TLDR:</span> A novel framework
+								for
+								Q-learning that models the maximal
+								soft-values without needing to sample from a policy.</div>
+					</center>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br>
+	<hr>
+	<center>
+		<h1>Abstract</h1>
+	</center>
+	<table align="center">
+		<tbody>
+			<tr>
+				<td>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p style="font-size: 110%" class="mt-3">
+		Modern Deep Reinforcement Learning (RL) algorithms require estimates of the maximal Q-value,
+		which are difficult
+		to
+		compute in continuous domains with an infinite number of possible actions. In this work, we
+		introduce a new
+		update
+		rule for online and offline RL which directly models the maximal value using Extreme Value
+		Theory (EVT), drawing
+		inspiration from Economics. By doing so, we avoid computing Q-values using out-of-distribution
+		actions which is
+		often a substantial source of error. <br> <br>
+
+		Our key insight is to introduce an objective that directly
+		estimates the
+		optimal soft-value functions (LogSumExp) in the maximum entropy RL setting without needing to
+		sample from a
+		policy.
+		Using EVT, we derive our <b>Extreme Q-Learning</b> framework and consequently online and, for
+		the first time,
+		offline MaxEnt Q-learning algorithms, that do not explicitly require access to a policy or its
+		entropy.
+		Our method obtains consistently strong performance in the D4RL benchmark, outperforming prior
+		works on some
+		tasks while offering moderate improvements over SAC and TD3 on online DM Control tasks.
+	</p>
+
+	<!-- Add in Results Section -->
+
+	<br>
+
+
+	<!-- <br><br>
+	<hr>
+	<center>
+		<h1>Video</h1>
+	</center>
+	<table align="center" width="1100px">
+		<tbody>
+			<tr>
+			</tr>
+		</tbody>
+	</table>
+
+	<table align="center" width="800px">
+		<tbody>
+			<tr>
+				<td align="center" width="800px">
+					<div id="presentation-embed-38967041" class="slp my-auto" style="width: 100%;">
+						<iframe
+							src="https://slideslive.com/embed/presentation/38967041?embed_parent_url=https%3A%2F%2Fneurips.cc%2Fvirtual%2F2021%2Fposter%2F26537&embed_container_origin=https%3A%2F%2Fneurips.cc&embed_container_id=presentation-embed-38967041&auto_load=true&auto_play=false&zoom_ratio=&disable_fullscreen=false&locale=en&vertical_enabled=true&vertical_enabled_on_mobile=false&allow_hidden_controls_when_paused=true&fit_to_viewport=true&user_uuid=2f7f8b9e-d23a-478f-ad00-f0905aa4836d"
+							height="564" scrolling="no" frameborder="0"
+							sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation"
+							allow="autoplay; fullscreen" allowfullscreen="" webkitallowfullscreen=""
+							mozallowfullscreen="" style="margin: 0px auto; display: block; width: 100%;"></iframe>
+					</div>
+				</td>
+			</tr>
+
+		</tbody>
+	</table> -->
+
+	<hr>
+	<center>
+		<h1>Approach</h1>
+	</center>
+	<table align="center" width="600px">
+		<tbody>
+			<tr>
+				<td align="center"><img class="round" style="height:600px; margin-left: 60px" src="approach.png"></a>
+				</td>
+				<!-- </br> -->
+			</tr>
+		</tbody>
+	</table>
+	<!-- <center> <br>
+		<span style="font-size:24px">&nbsp;<a href="https://github.com/Div99/IQ-Learn">[GitHub]</a>
+		</span><i></i>
+		<span style="font-size:28px"></span>
+		<br>
+	</center> -->
+	<table align="center" width="800px">
+		<tbody>
+			<tr></tr>
+		</tbody>
+	</table>
+	<br>
+	<hr>
+
+	<center>
+		<h1>Offline Results</h1>
+	</center>
+	<br>
+
+	<table align="center" width="900px">
+		<tbody>
+			<tr>
+				<td width="400px">
+					<center>
+						<img class="img" src="compare.png" style="width:100%;height:auto;"><br>
+					</center>
+				</td>
+			</tr>
+			<tr>
+				<td width=" 300px">
+					<center>
+						<div style="font-size:17px; padding-bottom: 10px">
+							<i>(Above) XQL reaching state of the art results on the Offline D4RL Benchmark<br></i>
+						</div>
+						<!-- <span style="font-size:15px;"><i>Showing <span class=" text-primary bold">Pong</span> (Top
+								Left),
+								<span class="text-danger bold">Breakout</span> (Top Right), <span
+									class="text-success bold">Space
+									Invaders</span> (Bottom Left) ,
+								<span class="text-info bold">QBert</span> (Bottom Right).</i>
+						</span> -->
+					</center>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<table align="center" width="900px">
+		<tbody>
+			<tr>
+				<td width="300">
+					<center>
+						<img class="img-banner" src="hopper_xsac.gif" style="width:75%;height:auto;"><br>
+					</center>
+				</td>
+				<td width="300">
+					<center>
+						<img class="img-banner" src="hopper_sac.gif" style="width:75%;height:auto;"><br>
+					</center>
+				</td>
+			</tr>
+			<tr>
+				<td width=" 300px">
+					<center>
+						<div style="font-size:17px; padding-bottom: 10px">
+							<i>TODO: insert offline RL GIF<br></i>
+						</div>
+					</center>
+				</td>
+				<td width=" 300px">
+					<center>
+						<div style="font-size:17px; padding-bottom: 10px">
+							<i>TODO: insert offline RL GIF<br></i>
+						</div>
+					</center>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<hr>
+
+	<center>
+		<h1>Online Results</h1>
+	</center>
+	<br>
+
+	<table align="center" width="900px">
+		<tbody>
+			<tr>
+				<td width="400px">
+					<center>
+						<img class="img" src="website_td3.png" style="width:100%;height:auto;"><br>
+					</center>
+				</td>
+			</tr>
+			<tr>
+				<td width=" 300px">
+					<center>
+						<div style="font-size:17px; padding-bottom: 10px">
+							<i>X-TD3 showing gains on some DM Control Tasks versus standard TD3.<br></i>
+						</div>
+					</center>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<table align="center" width="900px">
+		<tbody>
+			<tr>
+				<td width="300">
+					<center>
+						<img class="img-banner" src="hopper_xsac.gif" style="width:75%;height:auto;"><br>
+					</center>
+				</td>
+				<td width="300">
+					<center>
+						<img class="img-banner" src="hopper_sac.gif" style="width:75%;height:auto;"><br>
+					</center>
+				</td>
+			</tr>
+			<tr>
+				<td width=" 300px">
+					<center>
+						<div style="font-size:17px; padding-bottom: 10px">
+							<i>X-SAC on Hopper Hop (Reward 362)<br></i>
+						</div>
+					</center>
+				</td>
+				<td width=" 300px">
+					<center>
+						<div style="font-size:17px; padding-bottom: 10px">
+							<i>SAC on Hopper Hop (Reward 305)<br></i>
+						</div>
+					</center>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<hr>
+
+	<center>
+		<h1>Paper</h1>
+	</center>
+	<table align="center" width="600px">
+		<tbody>
+			<tr>
+				<td align="center"><a href="https://arxiv.org/abs/2106.12142"><img style="height:350px"
+							src="paper_thumb.png"></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<table align="center" width="500px">
+		<tbody>
+			<tr>
+				<td><span style="font-size:24px">
+						<center>
+							<a
+								href="https://proceedings.neurips.cc/paper/2021/file/210f760a89db30aa72ca258a3483cc7f-Paper.pdf">[Paper]</a>
+						</center>
+					</span></td>
+				<td><span style="font-size:24px">
+						<center>
+							<a
+								href="https://proceedings.neurips.cc/paper/2021/file/210f760a89db30aa72ca258a3483cc7f-Supplemental.pdf">[Suppl]</a>
+						</center>
+					</span></td>
+				<td><span style="font-size:24px">
+						<center>
+							<a href="bibtex.txt">[Bibtex]</a>
+						</center>
+					</span></td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<hr>
+	<center>
+		<h1>Citation</h1>
+	</center>
+	<table align="center" width="1000px">
+		<tbody>
+			<tr>
+				<td><span style="font-size:14pt">
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<pre>
+@inproceedings{
+	garg2022extreme,
+	title={Extreme Q-Learning: MaxEnt Reinforcement Learning Without Entropy},
+	author={Divyansh Garg and Joey Hejna and Matthieu Geist and Stefano Ermon},
+	journal={arXiv preprint arXiv:TODO},
+	year={2022},
+	url={TODO}
+	}
+</pre>
+	<br><br>
+	<br><br>
+	<script>
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date(); a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+		ga('create', 'UA-75863369-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+</body>
+
+</html>

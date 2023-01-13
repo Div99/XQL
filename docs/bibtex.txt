@@ -1,0 +1,8 @@
+@inproceedings{
+	garg2022extreme,
+	title={Extreme Q-Learning: MaxEnt Reinforcement Learning Without Entropy},
+	author={Divyansh Garg and Joey Hejna and Matthieu Geist and Stefano Ermon},
+	booktitle={Thirty-Sixth Conference on Neural Information Processing Systems},
+	year={2022},
+	url={TODO}
+}

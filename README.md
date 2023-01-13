@@ -12,7 +12,7 @@ It obtains state-of-art results on Offline RL benchmarks such as D4RL and can im
 
 <a href="https://div99.github.io/XQL">
 <p align="center">
-	<img class="img" src="website/diagram.svg" style="width:400px;height:auto;"><br>
+	<img class="img" src="docs/diagram.svg" style="width:400px;height:auto;"><br>
 </p>
 </a>
 
