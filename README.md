@@ -1,6 +1,8 @@
-# Extreme Q-Learning (X-QL)
+# Extreme Q-Learning (X-QL) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Div99/XQL/blob/main/Gumbel_Regression.ipynb)
 
 ### [**[Project Page](https://div99.github.io/XQL)**] 
+
+
 
 Official code base for **[Extreme Q-Learning: MaxEnt RL without Entropy](https://arxiv.org/abs/2301.02328)** by [Div Garg](https://divyanshgarg.com/)\*, [Joey Hejna](https://jhejna.github.io)\*, [Mattheiu Geist](https://scholar.google.com/citations?user=ectPLEUAAAAJ&hl=en), and [Stefano Ermon](https://cs.stanford.edu/~ermon/).
 (*Equal Contribution)
@@ -41,9 +43,10 @@ Using EVT, we derive our **Extreme Q-Learning (XQL)** framework and consequently
 
 ## Usage
 
-This repository is divided into two subparts, one for the offline and one for the online experiments.
+For exploring Gumbel Regression, you can play with the [Gumbel Regression notebook](https://github.com/Div99/XQL/blob/main/Gumbel_Regression.ipynb) in Google Colab. 
 
-To install and use X-QL check the instructions provided in the [Offline](offline) folder for running Offline RL and [Online](online) folder for running Online RL.
+This repository is divided into two subparts, one for the offline RL and one for the online RL experiments.
+To install and use X-QL check the instructions provided in the [Offline folder](offline) for running Offline RL and [Online folder](online) for running Online RL.
 
 
 ## Questions
