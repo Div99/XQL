@@ -22,7 +22,7 @@ def loss_exp(diff, alpha=1.0, args=None):
 def gumbel_rescale_loss(diff, alpha, args=None):
     z = diff/alpha
     if args.max_clip is not None:
-        z = jnp.minimum(z, args.max_clip) # jnp.clip(x, a_min=-1000, a_max=args.max_clip)  
+        z = jnp.minimum(z, args.max_clip)
     max_z = jnp.max(z, axis=0)
     max_z = jnp.where(max_z < -1.0, -1.0, max_z)
     max_z = jax.lax.stop_gradient(max_z)  # Detach the gradients
