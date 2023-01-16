@@ -7,28 +7,29 @@ from functools import partial
 from common import Batch, InfoDict, Model, Params, PRNGKey
 
 
-def loss(diff, expectile=0.8):
-    weight = jnp.where(diff > 0, expectile, (1 - expectile))
-    return weight * (diff**2)
-
-
-def loss_exp(diff, alpha=1.0, args=None):
-    diff = diff
-    x = diff/alpha
-    loss_partial = grad_gumbel(x, alpha, args.max_clip)
-    loss = jax.lax.stop_gradient(loss_partial) * x * diff.shape[0]
-    return loss  # jnp.minimum(loss, 200)
-
 def gumbel_rescale_loss(diff, alpha, args=None):
+    """ Gumbel loss J: E[e^x - x - 1]. For stability to outliers, we scale the gradients with the max value over a batch
+    and optionally clip the exponent. This has the effect of training with an adaptive lr.
+    """
     z = diff/alpha
     if args.max_clip is not None:
-        z = jnp.minimum(z, args.max_clip)
+        z = jnp.minimum(z, args.max_clip) # clip max value
     max_z = jnp.max(z, axis=0)
     max_z = jnp.where(max_z < -1.0, -1.0, max_z)
     max_z = jax.lax.stop_gradient(max_z)  # Detach the gradients
-    loss = jnp.exp(z - max_z) - z*jnp.exp(-max_z) - jnp.exp(-max_z)
-    return loss # jnp.minimum(loss.mean(), 200)
+    loss = jnp.exp(z - max_z) - z*jnp.exp(-max_z) - jnp.exp(-max_z)m  # scale by e^max_z
+    return loss
 
+def gumbel_log_loss(diff, alpha=1.0):
+    """ Gumbel loss J: E[e^x - x - 1]. We can calculate the log of Gumbel loss for stability, i.e. Log(J + 1)
+    log_gumbel_loss: log((e^x - x - 1).mean() + 1)
+    """
+    diff = diff
+    x = diff/alpha
+    grad = grad_gumbel(x, alpha)
+    # use analytic gradients to improve stability
+    loss = jax.lax.stop_gradient(grad) * x
+    return loss
 
 def grad_gumbel(x, alpha, clip_max=7):
     """Calculate grads of log gumbel_loss: (e^x - 1)/[(e^x - x - 1).mean() + 1]
@@ -51,18 +52,9 @@ def grad_gumbel(x, alpha, clip_max=7):
         (jnp.mean(jnp.exp(x1) - x_orig * jnp.exp(-x_max), axis=0, keepdims=True))
     return grad
 
-
-def loss_gumbel(diff, alpha=1.0):
-    """ Gumbel loss J: E[e^x - x - 1]. We calculate the log of Gumbel loss for stability, i.e. Log(J + 1)
-    log_gumbel_loss: log((e^x - x - 1).mean() + 1)
-    """
-    diff = diff
-    x = diff/alpha
-    grad = grad_gumbel(x, alpha)
-    # use analytic gradients to improve stability
-    loss = jax.lax.stop_gradient(grad) * x
-    return loss
-
+def expectile_loss(diff, expectile=0.8):
+    weight = jnp.where(diff > 0, expectile, (1 - expectile))
+    return weight * (diff**2)
 
 def update_v(critic: Model, value: Model, batch: Batch,
              expectile: float, loss_temp: float, double: bool, vanilla: bool, key: PRNGKey, args) -> Tuple[Model, InfoDict]:
@@ -100,10 +92,10 @@ def update_v(critic: Model, value: Model, batch: Batch,
         v = value.apply({'params': value_params}, obs)
 
         if vanilla:
-            value_loss = loss(q - v, expectile).mean()
+            value_loss = expectile_loss(q - v, expectile).mean()
         else:
             if args.log_loss:
-                value_loss = loss_exp(q - v, alpha=loss_temp, args=args).mean()
+                value_loss = gumbel_log_loss(q - v, alpha=loss_temp, args=args).mean()
             else:
                 value_loss = gumbel_rescale_loss(q - v, alpha=loss_temp, args=args).mean()
         return value_loss, {
