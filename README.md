@@ -7,11 +7,11 @@
 Official code base for **[Extreme Q-Learning: MaxEnt RL without Entropy](https://arxiv.org/abs/2301.02328)** by [Div Garg](https://divyanshgarg.com/)\*, [Joey Hejna](https://jhejna.github.io)\*, [Mattheiu Geist](https://scholar.google.com/citations?user=ectPLEUAAAAJ&hl=en), and [Stefano Ermon](https://cs.stanford.edu/~ermon/).
 (*Equal Contribution)
 
-This repo contains code for two novel methods **Gumbel Regression** and **Extreme Q-learning (X-QL)** formulated in our paper. 
+This repo contains code for two novel methods: **Gumbel Regression** and **Extreme Q-learning (X-QL)** formulated in our paper. 
 
 **Gumbel Regression** is a novel method that enables accurate and unbiased estimates of the Partition function over a distribution using simple gradient descent.
 
-**X-QL** is an novel & simple RL algorithm for Q-learning that models the maximal soft-values (LogSumExp) without needing to sample from a policy. It directly estimates the optimal Bellman operator B* in continuous action spaces, successfully extending Q-iteration to continuous settings.
+**Extreme Q-learning (X-QL)** is an novel & simple RL algorithm for Q-learning that models the maximal soft-values (LogSumExp) without needing to sample from a policy. It directly estimates the optimal Bellman operator B* in continuous action spaces, successfully extending Q-iteration to continuous settings.
 
 It obtains state-of-art results on Offline RL benchmarks such as D4RL, and can improve existing Online RL methods like SAC and TD3. It combines Max Entropy, Conservative & Implicit RL in a single framework.
 # Introduction
