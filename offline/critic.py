@@ -17,7 +17,7 @@ def gumbel_rescale_loss(diff, alpha, args=None):
     max_z = jnp.max(z, axis=0)
     max_z = jnp.where(max_z < -1.0, -1.0, max_z)
     max_z = jax.lax.stop_gradient(max_z)  # Detach the gradients
-    loss = jnp.exp(z - max_z) - z*jnp.exp(-max_z) - jnp.exp(-max_z)m  # scale by e^max_z
+    loss = jnp.exp(z - max_z) - z*jnp.exp(-max_z) - jnp.exp(-max_z)  # scale by e^max_z
     return loss
 
 def gumbel_log_loss(diff, alpha=1.0):
