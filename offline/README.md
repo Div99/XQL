@@ -4,6 +4,8 @@
 
 ### Install dependencies
 
+These are the same setup instructions as in [Implicit Q-Learning](https://github.com/ikostrikov/implicit_q_learning).
+
 ```bash
 pip install --upgrade pip
 
